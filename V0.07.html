@@ -1,0 +1,407 @@
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enerji ve Su Harcama Takibi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 25px;
+            padding: 5px 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .search-container input {
+            border: none;
+            outline: none;
+            padding: 10px;
+            border-radius: 25px;
+            flex: 1;
+            font-size: 16px;
+        }
+        .search-container button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .icon {
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            margin: 0 10px;
+        }
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: white;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="search-container">
+            <input type="text" id="search-box" placeholder="Ürün arayın..." onkeyup="searchTable()">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+    </header>
+
+    <main>
+        <table id="data-table">
+  <thead>
+    <tr>
+      <th>Ürün</th>
+      <th>Su Tüketimi (Litre)</th>
+      <th>Elektrik Tüketimi (kWh)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Domates (1 kg)</td><td>214</td><td>0.5</td></tr>
+    <tr><td>Pirinç (1 kg)</td><td>2500</td><td>2.5</td></tr>
+    <tr><td>Buğday (1 kg)</td><td>1500</td><td>1.2</td></tr>
+    <tr><td>Mısır (1 kg)</td><td>1220</td><td>1.0</td></tr>
+    <tr><td>Patates (1 kg)</td><td>287</td><td>0.3</td></tr>
+    <tr><td>Süt (1 litre)</td><td>1020</td><td>0.8</td></tr>
+    <tr><td>Yumurta (1 adet)</td><td>196</td><td>0.2</td></tr>
+    <tr><td>Sığır Eti (1 kg)</td><td>15000</td><td>15.0</td></tr>
+    <tr><td>Tavuk Eti (1 kg)</td><td>4325</td><td>4.0</td></tr>
+    <tr><td>Balık (1 kg)</td><td>3000</td><td>3.0</td></tr>
+    <tr><td>Kahve (1 kg)</td><td>18900</td><td>10.0</td></tr>
+    <tr><td>Çay (1 kg)</td><td>8860</td><td>5.0</td></tr>
+    <tr><td>Şeker (1 kg)</td><td>1500</td><td>1.5</td></tr>
+    <tr><td>Çikolata (1 kg)</td><td>17000</td><td>12.0</td></tr>
+    <tr><td>Elma (1 kg)</td><td>822</td><td>0.6</td></tr>
+    <tr><td>Muz (1 kg)</td><td>790</td><td>0.5</td></tr>
+    <tr><td>Portakal (1 kg)</td><td>560</td><td>0.4</td></tr>
+    <tr><td>Üzüm (1 kg)</td><td>610</td><td>0.5</td></tr>
+    <tr><td>Zeytin (1 kg)</td><td>3025</td><td>2.0</td></tr>
+    <tr><td>Zeytinyağı (1 litre)</td><td>14500</td><td>10.0</td></tr>
+    <tr><td>Ayçiçek Yağı (1 litre)</td><td>9000</td><td>8.0</td></tr>
+    <tr><td>Bira (1 litre)</td><td>300</td><td>0.3</td></tr>
+    <tr><td>Şarap (1 litre)</td><td>870</td><td>0.8</td></tr>
+    <tr><td>Ekmek (1 kg)</td><td>1600</td><td>1.2</td></tr>
+    <tr><td>Makarna (1 kg)</td><td>1850</td><td>1.5</td></tr>
+    <tr><td>Peynir (1 kg)</td><td>5000</td><td>4.0</td></tr>
+    <tr><td>Yoğurt (1 kg)</td><td>1500</td><td>1.2</td></tr>
+    <tr><td>Tereyağı (1 kg)</td><td>5500</td><td>5.0</td></tr>
+    <tr><td>Bal (1 kg)</td><td>1000</td><td>0.8</td></tr>
+    <tr><td>Fındık (1 kg)</td><td>9000</td><td>7.0</td></tr>
+    <tr><td>Badem (1 kg)</td><td>8000</td><td>6.0</td></tr>
+    <tr><td>Ceviz (1 kg)</td><td>9000</td><td>7.0</td></tr>
+    <tr><td>Antep Fıstığı (1 kg)</td><td>8000</td><td>6.0</td></tr>
+    <tr><td>Kaju (1 kg)</td><td>10000</td><td>8.0</td></tr>
+    <tr><td>Kuru Üzüm (1 kg)</td><td>2000</td><td>1.5</td></tr>
+    <tr><td>Kuru Kayısı (1 kg)</td><td>3000</td><td>2.0</td></tr>
+    <tr><td>Kuru İncir (1 kg)</td><td>2500</td><td>1.8</td></tr>
+    <tr><td>Kuru Erik (1 kg)</td><td>2000</td><td>1.5</td></tr>
+    <tr><td>Kuru Elma (1 kg)</td><td>1500</td><td>1.2</td></tr>
+    <tr><td>Kuru Muz (1 kg)</td><td>1800</td><td>1.4</td></tr>
+    <tr><td>Kuru Portakal (1 kg)</td><td>1700</td><td>1.3</td></tr>
+    <tr><td>Kuru Armut (1 kg)</td><td>1600</td><td>1.2</td></tr>
+    <tr><td>Kuru Şeftali (1 kg)</td><td>1900</td><td>1.5</td></tr>
+    <tr><td>Kuru Vişne (1 kg)</td><td>2200</td><td>1.7</td></tr>
+    <tr><td>Kuru Kiraz (1 kg)</td><td>2100</td><td>1.6</td></tr>
+    <tr><td>Kuru Dut (1 kg)</td><td>1800</td><td>1.4</td></tr>
+    <tr><td>Kuru Hurma (1 kg)</td><td>2300</td><td>1.8</td></tr>
+    <tr><td>Pamuklu tişört (1 adet)</td><td>2700</td><td>2.0</td></tr>
+    <tr><td>Kot pantolon (1 adet)</td><td>7000</td><td>5.0</td></tr>
+    <tr><td>Pamuklu havlu (1 adet)</td><td>1100</td><td>1.0</td></tr>
+    <tr><td>Yün kazak (1 adet)</td><td>6000</td><td>4.0</td></tr>
+    <tr><td>Deri ayakkabı (1 çift)</td><td>8000</td><td>6.0</td></tr>
+    <tr><td>Spor ayakkabı (1 çift)</td><td>4400</td><td>3.0</td></tr>
+    <tr><td>İpek kravat (1 adet)</td><td>1200</td><td>1.0</td></tr>
+    <tr><td>Pamuklu çarşaf (1 adet)</td><td>9000</td><td>7.0</td></tr>
+    <tr><td>Jeans ceket (1 adet)</td><td>8000</td><td>6.0</td></tr>
+    <tr><td>Polar ceket (1 adet)</td><td>1500</td><td>1.0</td></tr>
+    <tr><td>Pamuklu iç çamaşırı (1 adet)</td><td>2500</td><td>2.0</td></tr>
+    <tr><td>Yün şapka (1 adet)</td><td>1000</td><td>1.0</td></tr>
+    <tr><td>Pamuklu çorap (1 çift)</td><td>250</td><td>0.2</td></tr>
+    <tr><td>İpek bluz (1 adet)</td><td>4000</td><td>3.0</td></tr>
+    <tr><td>Keten gömlek (1 adet)</td><td>2700</td><td>2.0</td></tr>
+    <tr><td>Sentetik eşofman (1 takım)</td><td>1200</td><td>1.0</td></tr>
+    <tr><td>Pamuklu bornoz (1 adet)</td><td>11000</td><td>8.0</td></tr>
+    <tr><td>Yün atkı (1 adet)</td><td>1500</td><td>1.0</td></tr>
+    <tr><td>Deri cüzdan (1 adet)</td><td>2000</td><td>1.5</td></tr>
+    <tr><td>Pamuklu şort (1 adet)</td><td>2500</td><td>2.0</td></tr>
+    <tr><td>Yün eldiven (1 çift)</td><td>1000</td><td>1.0</td></tr>
+    <tr><td>Pamuklu pijama (1 takım)</td><td>6000</td><td>4.0</td></tr>
+    <tr><td>Sentetik yağmurluk (1 adet)</td><td>1800</td><td>1.5</td></tr>
+    <tr><td>Pamuklu bebek bezi (1 adet)</td><td>800</td><td>0.6</td></tr>
+    <tr><td>Yün battaniye (1 adet)</td><td>10000</td><td>7.0</td></tr>
+    <tr><td>Pamuklu masa örtüsü (1 adet)</td><td>4000</td><td>3.0</td></tr>
+    <tr><td>İpek yastık kılıfı (1 adet)</td><td>1500</td><td>1.0</td></tr>
+    <tr><td>Pamuklu çanta (1 adet)</td><td>2000</td><td>1.5</td></tr>
+    <tr><td>Deri kemer (1 adet)</td><td>1500</td><td>1.0</td></tr>
+    <tr><td>Pamuklu mendil (1 adet)</td><td>50</td><td>0.05</td></tr>
+    <tr><td>Pamuklu gömlek (1 adet)</td><td>2500</td><td>2.0</td></tr>
+    <tr><td>Yün çorap (1 çift)</td><td>500</td><td>0.4</td></tr>
+    <tr><td>Pamuklu etek (1 adet)</td><td>3000</td><td>2.0</td></tr>
+    <tr><td>İpek şal (1 adet)</td><td>1000</td><td>1.0</td></tr>
+    <tr><td>Keten pantolon (1 adet)</td><td>3500</td><td>2.5</td></tr>
+    <tr><td>Sentetik şapka (1 adet)</td><td>200</td><td>0.2</td></tr>
+    <tr><td>Pamuklu atlet (1 adet)</td><td>500</td><td>0.4</td></tr>
+    <tr><td>Yün ceket (1 adet)</td><td>6000</td><td>4.0</td></tr>
+    <tr><td>Deri çanta (1 adet)</td><td>3000</td><td>2.0</td></tr>
+    <tr><td>Pamuklu örtü (1 adet)</td><td>2000</td><td>1.5</td></tr>
+    <tr><td>İpek gömlek (1 adet)</td><td>4000</td><td>3.0</td></tr>
+    <tr><td>Keten şort (1 adet)</td><td>2000</td><td>1.5</td></tr>
+    <tr><td>Sentetik etek (1 adet)</td><td>1500</td><td>1.0</td></tr>
+    <tr><td>Pamuklu şal (1 adet)</td><td>1000</td><td>1.0</td></tr>
+    <tr><td>Yün kazak (1 adet)</td><td>6000</td><td>4.0</td></tr>
+    <tr><td>Deri mont (1 adet)</td><td>7000</td><td>5.0</td></tr>
+    <tr><td>Pamuklu çocuk elbisesi (1 adet)</td><td>3000</td><td>2.0</td></tr>
+    <tr><td>İpek eşarp (1 adet)</td><td>1200</td><td>1.0</td></tr>
+    <tr><td>Keten ceket (1 adet)</td><td>4000</td><td>3.0</td></tr>
+    <tr><td>Sentetik çorap (1 çift)</td><td>100</td><td>0.1</td></tr>
+    <tr><td>Akıllı telefon (1 adet)</td><td>12760</td><td>100.0</td></tr>
+    <tr><td>Dizüstü bilgisayar (1 adet)</td><td>20000</td><td>200.0</td></tr>
+    <tr><td>Televizyon (1 adet)</td><td>15000</td><td>150.0</td></tr>
+    <tr><td>Tablet (1 adet)</td><td>10000</td><td>100.0</td></tr>
+    <tr><td>Oyun konsolu (1 adet)</td><td>18000</td><td>180.0</td></tr>
+    <tr><td>Buzdolabı (1 adet)</td><td>50000</td><td>500.0</td></tr>
+    <tr><td>Çamaşır makinesi (1 adet)</td><td>40000</td><td>400.0</td></tr>
+    <tr><td>Bulaşık makinesi (1 adet)</td><td>35000</td><td>350.0</td></tr>
+    <tr><td>Fırın (1 adet)</td><td>30000</td><td>300.0</td></tr>
+    <tr><td>Mikrodalga fırın (1 adet)</td><td>15000</td><td>150.0</td></tr>
+    <tr><td>Elektrikli süpürge (1 adet)</td><td>10000</td><td>100.0</td></tr>
+    <tr><td>Ütü (1 adet)</td><td>5000</td><td>50.0</td></tr>
+    <tr><td>Saç kurutma makinesi (1 adet)</td><td>3000</td><td>30.0</td></tr>
+    <tr><td>Klima (1 adet)</td><td>25000</td><td>250.0</td></tr>
+    <tr><td>Elektrikli ısıtıcı (1 adet)</td><td>8000</td><td>80.0</td></tr>
+    <tr><td>Fan (1 adet)</td><td>2000</td><td>20.0</td></tr>
+    <tr><td>Nem alma cihazı (1 adet)</td><td>10000</td><td>100.0</td></tr>
+    <tr><td>Hava temizleyici (1 adet)</td><td>12000</td><td>120.0</td></tr>
+    <tr><td>Elektrikli şömine (1 adet)</td><td>7000</td><td>70.0</td></tr>
+    <tr><td>Su ısıtıcısı (1 adet)</td><td>5000</td><td>50.0</td></tr>
+    <tr><td>Kahve makinesi (1 adet)</td><td>6000</td><td>60.0</td></tr>
+    <tr><td>Tost makinesi (1 adet)</td><td>3000</td><td>30.0</td></tr>
+    <tr><td>Blender (1 adet)</td><td>2500</td><td>25.0</td></tr>
+    <tr><td>Mutfak robotu (1 adet)</td><td>4000</td><td>40.0</td></tr>
+    <tr><td>Meyve sıkacağı (1 adet)</td><td>3500</td><td>35.0</td></tr>
+    <tr><td>Elektrikli ızgara (1 adet)</td><td>5000</td><td>50.0</td></tr>
+    <tr><td>Waffle makinesi (1 adet)</td><td>2000</td><td>20.0</td></tr>
+    <tr><td>Dondurma makinesi (1 adet)</td><td>4500</td><td>45.0</td></tr>
+    <tr><td>Yoğurt makinesi (1 adet)</td><td>3000</td><td>30.0</td></tr>
+    <tr><td>Ekmek yapma makinesi (1 adet)</td><td>6000</td><td>60.0</td></tr>
+    <tr><td>Dijital saat (1 adet)</td><td>500</td><td>5.0</td></tr>
+    <tr><td>Projeksiyon cihazı (1 adet)</td><td>10000</td><td>100.0</td></tr>
+    <tr><td>Hoparlör (1 adet)</td><td>1000</td><td>10.0</td></tr>
+    <tr><td>Kulaklık (1 adet)</td><td>200</td><td>2.0</td></tr>
+    <tr><td>Mikrofon (1 adet)</td><td>300</td><td>3.0</td></tr>
+    <tr><td>Web kamerası (1 adet)</td><td>400</td><td>4.0</td></tr>
+    <tr><td>Modem (1 adet)</td><td>1000</td><td>10.0</td></tr>
+    <tr><td>Router (1 adet)</td><td>1200</td><td>12.0</td></tr>
+    <tr><td>Güneş paneli (1 adet)</td><td>50000</td><td>500.0</td></tr>
+    <tr><td>Pil şarj cihazı (1 adet)</td><td>500</td><td>5.0</td></tr>
+    <tr><td>Power bank (1 adet)</td><td>1000</td><td>10.0</td></tr>
+    <tr><td>Yazıcı (1 adet)</td><td>5000</td><td>50.0</td></tr>
+    <tr><td>Tarayıcı (1 adet)</td><td>3000</td><td>30.0</td></tr>
+    <tr><td>Fotokopi makinesi (1 adet)</td><td>7000</td><td>70.0</td></tr>
+    <tr><td>Dijital fotoğraf makinesi (1 adet)</td><td>2000</td><td>20.0</td></tr>
+    <tr><td>Drone (1 adet)</td><td>3000</td><td>30.0</td></tr>
+    <tr><td>Akıllı saat (1 adet)</td><td>1500</td><td>15.0</td></tr>
+    <tr><td>Sanal gerçeklik gözlüğü (1 adet)</td><td>2000</td><td>20.0</td></tr>
+    <tr><td>Elektrikli scooter (1 adet)</td><td>10000</td><td>100.0</td></tr>
+    <tr><td>Elektrikli bisiklet (1 adet)</td><td>15000</td><td>150.0</td></tr>
+    <tr><td>A4 kağıt (1 sayfa)</td><td>10</td><td>0.1</td></tr>
+    <tr><td>Kitap (1 adet)</td><td>2500</td><td>25.0</td></tr>
+    <tr><td>Defter (1 adet)</td><td>1000</td><td>10.0</td></tr>
+    <tr><td>Karton kutu (1 adet)</td><td>500</td><td>5.0</td></tr>
+    <tr><td>Gazete (1 adet)</td><td>300</td><td>3.0</td></tr>
+    <tr><td>Post-it (1 adet)</td><td>1</td><td>0.01</td></tr>
+    <tr><td>Zarf (1 adet)</td><td>50</td><td>0.5</td></tr>
+    <tr><td>Kağıt torba (1 adet)</td><td>50</td><td>0.5</td></tr>
+    <tr><td>Karton kutu (1 adet)</td><td>500</td><td>5.0</td></tr>
+    <tr><td>Kitap (1 adet)</td><td>2500</td><td>25.0</td></tr>
+    <tr><td>Defter (1 adet)</td><td>1000</td><td>10.0</td></tr>
+    <tr><td>Gazete (1 adet)</td><td>300</td><td>3.0</td></tr>
+    <tr><td>Post-it (1 adet)</td><td>1</td><td>0.01</td></tr>
+    <tr><td>Zarf (1 adet)</td><td>50</td><td>0.5</td></tr>
+    <tr><td>Karton bardak (1 adet)</td><td>20</td><td>0.2</td></tr>
+    <tr><td>Kağıt havlu (1 rulo)</td><td>200</td><td>2.0</td></tr>
+    <tr><td>Tuvalet kağıdı (1 rulo)</td><td>150</td><td>1.5</td></tr>
+    <tr><td>Karton tabak (1 adet)</td><td>30</td><td>0.3</td></tr>
+    <tr><td>Kağıt peçete (1 paket)</td><td>100</td><td>1.0</td></tr>
+    <tr><td>Çamaşır deterjanı (1 litre)</td><td>500</td><td>5.0</td></tr>
+    <tr><td>Bulaşık deterjanı (1 litre)</td><td>400</td><td>4.0</td></tr>
+    <tr><td>Yumuşatıcı (1 litre)</td><td>300</td><td>3.0</td></tr>
+    <tr><td>Çamaşır suyu (1 litre)</td><td>200</td><td>2.0</td></tr>
+    <tr><td>Yüzey temizleyici (1 litre)</td><td>150</td><td>1.5</td></tr>
+    <tr><td>Cam temizleyici (1 litre)</td><td>100</td><td>1.0</td></tr>
+    <tr><td>Halı şampuanı (1 litre)</td><td>250</td><td>2.5</td></tr>
+    <tr><td>Mobilya cilası (1 litre)</td><td>300</td><td>3.0</td></tr>
+    <tr><td>Oda spreyleri (1 litre)</td><td>200</td><td>2.0</td></tr>
+    <tr><td>Lavabo açıcı (1 litre)</td><td>150</td><td>1.5</td></tr>
+    <tr><td>Tuvalet temizleyici (1 litre)</td><td>100</td><td>1.0</td></tr>
+    <tr><td>Pas sökücü (1 litre)</td><td>250</td><td>2.5</td></tr>
+    <tr><td>Kireç sökücü (1 litre)</td><td>200</td><td>2.0</td></tr>
+    <tr><td>Sabun (1 kg)</td><td>500</td><td>5.0</td></tr>
+    <tr><td>Eldiven (1 çift)</td><td>50</td><td>0.5</td></tr>
+    <tr><td>Sünger (1 adet)</td><td>10</td><td>0.1</td></tr>
+    <tr><td>Bez (1 adet)</td><td>20</td><td>0.2</td></tr>
+    <tr><td>Toz bezi (1 adet)</td><td>15</td><td>0.15</td></tr>
+    <tr><td>Elektrikli süpürge torbası (1 adet)</td><td>30</td><td>0.3</td></tr>
+    <tr><td>Çöp poşeti (1 adet)</td><td>5</td><td>0.05</td></tr>
+    <tr><td>Mikrofiber bez (1 adet)</td><td>25</td><td>0.25</td></tr>
+    <tr><td>Halı yıkama makinesi (1 adet)</td><td>10000</td><td>100.0</td></tr>
+    <tr><td>Buharlı temizleyici (1 adet)</td><td>8000</td><td>80.0</td></tr>
+    <tr><td>Leke çıkarıcı (1 litre)</td><td>150</td><td>1.5</td></tr>
+    <tr><td>Çamaşır yıkama topu (1 adet)</td><td>50</td><td>0.5</td></tr>
+    <tr><td>Bulaşık makinesi parlatıcısı (1 litre)</td><td>200</td><td>2.0</td></tr>
+    <tr><td>Çamaşır makinesi temizleyici (1 litre)</td><td>150</td><td>1.5</td></tr>
+    <tr><td>Bulaşık makinesi tuzu (1 kg)</td><td>300</td><td>3.0</td></tr>
+    <tr><td>Çamaşır makinesi yumuşatıcısı (1 litre)</td><td>250</td><td>2.5</td></tr>
+    <tr><td>Çamaşır makinesi deterjanı (1 litre)</td><td>400</td><td>4.0</td></tr>
+    <tr><td>Cam silici (1 litre)</td><td>100</td><td>1.0</td></tr>
+    <tr><td>Mobilya temizleyici (1 litre)</td><td>150</td><td>1.5</td></tr>
+    <tr><td>Halı temizleyici (1 litre)</td><td>200</td><td>2.0</td></tr>
+    <tr><td>Duş temizleyici (1 litre)</td><td>100</td><td>1.0</td></tr>
+    <tr><td>Banyo temizleyici (1 litre)</td><td>150</td><td>1.5</td></tr>
+    <tr><td>Mutfak temizleyici (1 litre)</td><td>200</td><td>2.0</td></tr>
+    <tr><td>Lavabo temizleyici (1 litre)</td><td>100</td><td>1.0</td></tr>
+    <tr><td>Tuvalet temizleyici (1 litre)</td><td>150</td><td>1.5</td></tr>
+    <tr><td>Pas sökücü (1 litre)</td><td>250</td><td>2.5</td></tr>
+    <tr><td>Kireç sökücü (1 litre)</td><td>200</td><td>2.0</td></tr>
+    <tr><td>Sabun (1 kg)</td><td>500</td><td>5.0</td></tr>
+    <tr><td>Eldiven (1 çift)</td><td>50</td><td>0.5</td></tr>
+    <tr><td>Sünger (1 adet)</td><td>10</td><td>0.1</td></tr>
+    <tr><td>Bez (1 adet)</td><td>20</td><td>0.2</td></tr>
+    <tr><td>Toz bezi (1 adet)</td><td>15</td><td>0.15</td></tr>
+    <tr><td>Elektrikli süpürge torbası (1 adet)</td><td>30</td><td>0.3</td></tr>
+    <tr><td>Çöp poşeti (1 adet)</td><td>5</td><td>0.05</td></tr>
+    <tr><td>Mikrofiber bez (1 adet)</td><td>25</td><td>0.25</td></tr>
+    <tr><td>Halı yıkama makinesi (1 adet)</td><td>10000</td><td>100.0</td></tr>
+    <tr><td>Buharlı temizleyici (1 adet)</td><td>8000</td><td>80.0</td></tr>
+    <tr><td>Diş fırçası (1 adet)</td><td>50</td><td>0.5</td></tr>
+    <tr><td>Diş macunu (1 tüp)</td><td>100</td><td>1.0</td></tr>
+    <tr><td>Ağız gargarası (1 litre)</td><td>150</td><td>1.5</td></tr>
+    <tr><td>Tıraş makinesi (1 adet)</td><td>200</td><td>2.0</td></tr>
+    <tr><td>Tıraş köpüğü (1 litre)</td><td>100</td><td>1.0</td></tr>
+    <tr><td>Saç kurutma makinesi (1 adet)</td><td>3000</td><td>30.0</td></tr>
+    <tr><td>Saç düzleştirici (1 adet)</td><td>2500</td><td>25.0</td></tr>
+    <tr><td>Saç maşası (1 adet)</td><td>1000</td><td>10.0</td></tr>
+    <tr><td>Saç fırçası (1 adet)</td><td>200</td><td>2.0</td></tr>
+    <tr><td>Tarak (1 adet)</td><td>50</td><td>0.5</td></tr>
+    <tr><td>Şampuan (1 litre)</td><td>500</td><td>5.0</td></tr>
+    <tr><td>Saç kremi (1 litre)</td><td>400</td><td>4.0</td></tr>
+    <tr><td>Saç boyası (1 kutu)</td><td>300</td><td>3.0</td></tr>
+    <tr><td>Saç spreyi (1 litre)</td><td>200</td><td>2.0</td></tr>
+    <tr><td>Saç jölesi (1 litre)</td><td>150</td><td>1.5</td></tr>
+    <tr><td>Saç köpüğü (1 litre)</td><td>100</td><td>1.0</td></tr>
+    <tr><td>Saç maskesi (1 litre)</td><td>250</td><td>2.5</td></tr>
+    <tr><td>Duş jeli (1 litre)</td><td>300</td><td>3.0</td></tr>
+    <tr><td>Sabun (1 kg)</td><td>500</td><td>5.0</td></tr>
+    <tr><td>Vücut losyonu (1 litre)</td><td>400</td><td>4.0</td></tr>
+    <tr><td>Vücut yağı (1 litre)</td><td>300</td><td>3.0</td></tr>
+    <tr><td>Deodorant (1 litre)</td><td>200</td><td>2.0</td></tr>
+    <tr><td>Parfüm (1 litre)</td><td>1000</td><td>10.0</td></tr>
+    <tr><td>Tırnak makası (1 adet)</td><td>50</td><td>0.5</td></tr>
+    <tr><td>Tırnak törpüsü (1 adet)</td><td>10</td><td>0.1</td></tr>
+    <tr><td>Tırnak cilası (1 litre)</td><td>150</td><td>1.5</td></tr>
+    <tr><td>Tırnak temizleyici (1 litre)</td><td>100</td><td>1.0</td></tr>
+    <tr><td>Tırnak bakım kremi (1 litre)</td><td>200</td><td>2.0</td></tr>
+    <tr><td>Dudak kremi (1 adet)</td><td>50</td><td>0.5</td></tr>
+    <tr><td>El kremi (1 litre)</td><td>300</td><td>3.0</td></tr>
+    <tr><td>Yüz temizleyici (1 litre)</td><td>200</td><td>2.0</td></tr>
+    <tr><td>Tonik (1 litre)</td><td>150</td><td>1.5</td></tr>
+    <tr><td>Nemlendirici (1 litre)</td><td>300</td><td>3.0</td></tr>
+    <tr><td>Güneş kremi (1 litre)</td><td>400</td><td>4.0</td></tr>
+    <tr><td>Makyaj temizleyici (1 litre)</td><td>200</td><td>2.0</td></tr>
+    <tr><td>Fondöten (1 litre)</td><td>300</td><td>3.0</td></tr>
+    <tr><td>Ruj (1 adet)</td><td>100</td><td>1.0</td></tr>
+    <tr><td>Göz kalemi (1 adet)</td><td>50</td><td>0.5</td></tr>
+    <tr><td>Maskara (1 adet)</td><td>100</td><td>1.0</td></tr>
+    <tr><td>Allık (1 adet)</td><td>150</td><td>1.5</td></tr>
+    <tr><td>Far (1 adet)</td><td>200</td><td>2.0</td></tr>
+    <tr><td>Oje (1 adet)</td><td>100</td><td>1.0</td></tr>
+    <tr><td>Oje çıkarıcı (1 litre)</td><td>150</td><td>1.5</td></tr>
+    <tr><td>Tıraş bıçağı (1 adet)</td><td>50</td><td>0.5</td></tr>
+    <tr><td>Tıraş jeli (1 litre)</td><td>100</td><td>1.0</td></tr>
+    <tr><td>Duş lifi (1 adet)</td><td>20</td><td>0.2</td></tr>
+    <tr><td>Saç tokası (1 adet)</td><td>10</td><td>0.1</td></tr>
+    <tr><td>Saç bandı (1 adet)</td><td>10</td><td>0.1</td></tr>
+    <tr><td>Saç lastiği (1 adet)</td><td>5</td><td>0.05</td></tr>
+    <tr><td>Lego (100 adet)</td><td>500</td><td>5.0</td></tr>
+    <tr><td>Puzzle (1 adet)</td><td>100</td><td>1.0</td></tr>
+    <tr><td>Barbie bebek (1 adet)</td><td>200</td><td>2.0</td></tr>
+    <tr><td>Action figür (1 adet)</td><td>150</td><td>1.5</td></tr>
+    <tr><td>Oyuncak araba (1 adet)</td><td>100</td><td>1.0</td></tr>
+    <tr><td>Oyuncak tren (1 adet)</td><td>300</td><td>3.0</td></tr>
+    <tr><td>Oyuncak uçak (1 adet)</td><td>250</td><td>2.5</td></tr>
+    <tr><td>Oyuncak gemi (1 adet)</td><td>400</td><td>4.0</td></tr>
+    <tr><td>Oyuncak hayvan (1 adet)</td><td>100</td><td>1.0</td></tr>
+    <tr><td>Oyuncak bebek (1 adet)</td><td>200</td><td>2.0</td></tr>
+    <tr><td>Oyuncak ev (1 adet)</td><td>500</td><td>5.0</td></tr>
+    <tr><td>Oyuncak mutfak (1 adet)</td><td>400</td><td>4.0</td></tr>
+    <tr><td>Oyuncak tamir seti (1 adet)</td><td>300</td><td>3.0</td></tr>
+    <tr><td>Oyuncak doktor seti (1 adet)</td><td>200</td><td>2.0</td></tr>
+    <tr><td>Oyuncak müzik aleti (1 adet)</td><td>150</td><td>1.5</td></tr>
+    <tr><td>Oyuncak kukla (1 adet)</td><td>100</td><td>1.0</td></tr>
+    <tr><td>Oyuncak asker (1 adet)</td><td>50</td><td>0.5</td></tr>
+    <tr><td>Oyuncak silah (1 adet)</td><td>100</td><td>1.0</td></tr>
+    <tr><td>Oyuncak kale (1 adet)</td><td>300</td><td>3.0</td></tr>
+    <tr><td>Oyuncak şato (1 adet)</td><td>400</td><td>4.0</td></tr>
+    <tr><td>Oyuncak robot (1 adet)</td><td>200</td><td>2.0</td></tr>
+    <tr><td>Oyuncak uzay gemisi (1 adet)</td><td>300</td><td>3.0</td></tr>
+    <tr><td>Oyuncak helikopter (1 adet)</td><td>250</td><td>2.5</td></tr>
+    <tr><td>Oyuncak tank (1 adet)</td><td>200</td><td>2.0</td></tr>
+    <tr><td>Oyuncak denizaltı (1 adet)</td><td>300</td><td>3.0</td></tr>
+    <tr><td>Oyuncak ufo (1 adet)</td><td>150</td><td>1.5</td></tr>
+    <tr><td>Oyuncak dinozor (1 adet)</td><td>100</td><td>1.0</td></tr>
+    <tr><td>Oyuncak ejderha (1 adet)</td><td>200</td><td>2.0</td></tr>
+    <tr><td>Oyuncak peri (1 adet)</td><td>100</td><td>1.0</td></tr>
+    <tr><td>Oyuncak prenses (1 adet)</td><td>150</td><td>1.5</td></tr>
+  </tbody>
+</table>
+    </main>
+
+    <script>
+        function searchTable() {
+            let input = document.getElementById("search-box").value.toLowerCase();
+            let rows = document.querySelectorAll("#data-table tbody tr");
+
+            rows.forEach(row => {
+                let text = row.textContent.toLowerCase();
+                row.style.display = text.includes(input) ? "" : "none";
+            });
+        }
+    </script>
+</body>
+</html>
