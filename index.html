@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
@@ -16,7 +17,7 @@
             color: white;
             padding: 10px 20px;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
         }
         .search-container {
@@ -58,6 +59,11 @@
             color: white;
             margin: 0 10px;
         }
+        #google_translate_element {
+            background: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
         table {
             width: 90%;
             margin: 20px auto;
@@ -74,8 +80,16 @@
             color: white;
         }
     </style>
-    <script data-goatcounter="https://wattsanddrops.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'tr',
+                includedLanguages: 'tr,en,es,zh-CN,hi,ar,pt,ru,ja,de,fr,ko,it,nl,th,sv,pl,id,fi,da,he',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 <body>
     <header>
@@ -83,19 +97,20 @@
             <input type="text" id="search-box" placeholder="Ürün arayın..." onkeyup="searchTable()">
             <button><i class="fas fa-search"></i></button>
         </div>
+        <div id="google_translate_element"></div>
     </header>
 
     <main>
         <table id="data-table">
-  <thead>
-    <tr>
-      <th>Ürün</th>
-      <th>Su Tüketimi (Litre)</th>
-      <th>Elektrik Tüketimi (kWh)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>Domates (1 kg)</td><td>214</td><td>0.5</td></tr>
+            <thead>
+                <tr>
+                    <th>Ürün</th>
+                    <th>Su Tüketimi (Litre)</th>
+                    <th>Elektrik Tüketimi (kWh)</th>
+                </tr>
+            </thead>
+            <tbody>
+                 <tr><td>Domates (1 kg)</td><td>214</td><td>0.5</td></tr>
     <tr><td>Pirinç (1 kg)</td><td>2500</td><td>2.5</td></tr>
     <tr><td>Buğday (1 kg)</td><td>1500</td><td>1.2</td></tr>
     <tr><td>Mısır (1 kg)</td><td>1220</td><td>1.0</td></tr>
@@ -474,9 +489,9 @@
     <tr><td>Oyuncak dinozor (1 adet)</td><td>100</td><td>1.0</td></tr>
     <tr><td>Oyuncak ejderha (1 adet)</td><td>200</td><td>2.0</td></tr>
     <tr><td>Oyuncak peri (1 adet)</td><td>100</td><td>1.0</td></tr>
-    <tr><td>Oyuncak prenses (1 adet)</td><td>150</td><td>1.5</td></tr>
-  </tbody>
-</table>
+    <tr><td>Oyuncak prenses (1 adet)</td><td>150</td><td>1.5</td></tr> 
+            </tbody>
+        </table>
     </main>
 
     <script>
